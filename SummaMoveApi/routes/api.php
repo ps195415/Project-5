@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\PresentatieController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GuestOefeningenControl;
+use App\Http\Controllers\AuthenticationController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -14,10 +16,11 @@ use App\Http\Controllers\GuestOefeningenControl;
 |
 */
 
-Route::get('Guest', [GuestOefeningenControl::class,'index']);
-
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::get('Guest', [GuestOefeningenControl::class, 'index']);
+Route::post('/register', [AuthenticationController::class, 'register']);
+Route::post('/login', [AuthenticationController::class, 'login']);
+Route::group(['middleware' => ['auth:sanctum']], function () {
+    //protected routes
+    Route::apiResource('prestaties', PresentatieController::class);
+    
 });
-
-

@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Prestatie extends Model
 {
     use HasFactory;
+
+    public $timestamps = false;
+
+    protected $fillable = ['Aantal', 'Van', 'Tot', 'Datum'];
+
 }
