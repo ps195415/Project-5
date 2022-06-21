@@ -1,0 +1,15 @@
+C:\Users\maike\OneDrive\Bureaublad\School\Project-5\SummaMoveWPF\SummaMoveWPF\bin\Debug\SummaMoveWPF.exe.config
+C:\Users\maike\OneDrive\Bureaublad\School\Project-5\SummaMoveWPF\SummaMoveWPF\bin\Debug\SummaMoveWPF.exe
+C:\Users\maike\OneDrive\Bureaublad\School\Project-5\SummaMoveWPF\SummaMoveWPF\bin\Debug\SummaMoveWPF.pdb
+C:\Users\maike\OneDrive\Bureaublad\School\Project-5\SummaMoveWPF\SummaMoveWPF\obj\Debug\SummaMoveWPF.csproj.AssemblyReference.cache
+C:\Users\maike\OneDrive\Bureaublad\School\Project-5\SummaMoveWPF\SummaMoveWPF\obj\Debug\MainWindow.g.cs
+C:\Users\maike\OneDrive\Bureaublad\School\Project-5\SummaMoveWPF\SummaMoveWPF\obj\Debug\App.g.cs
+C:\Users\maike\OneDrive\Bureaublad\School\Project-5\SummaMoveWPF\SummaMoveWPF\obj\Debug\SummaMoveWPF_MarkupCompile.cache
+C:\Users\maike\OneDrive\Bureaublad\School\Project-5\SummaMoveWPF\SummaMoveWPF\obj\Debug\SummaMoveWPF_MarkupCompile.lref
+C:\Users\maike\OneDrive\Bureaublad\School\Project-5\SummaMoveWPF\SummaMoveWPF\obj\Debug\MainWindow.baml
+C:\Users\maike\OneDrive\Bureaublad\School\Project-5\SummaMoveWPF\SummaMoveWPF\obj\Debug\SummaMoveWPF.g.resources
+C:\Users\maike\OneDrive\Bureaublad\School\Project-5\SummaMoveWPF\SummaMoveWPF\obj\Debug\SummaMoveWPF.Properties.Resources.resources
+C:\Users\maike\OneDrive\Bureaublad\School\Project-5\SummaMoveWPF\SummaMoveWPF\obj\Debug\SummaMoveWPF.csproj.GenerateResource.cache
+C:\Users\maike\OneDrive\Bureaublad\School\Project-5\SummaMoveWPF\SummaMoveWPF\obj\Debug\SummaMoveWPF.csproj.CoreCompileInputs.cache
+C:\Users\maike\OneDrive\Bureaublad\School\Project-5\SummaMoveWPF\SummaMoveWPF\obj\Debug\SummaMoveWPF.exe
+C:\Users\maike\OneDrive\Bureaublad\School\Project-5\SummaMoveWPF\SummaMoveWPF\obj\Debug\SummaMoveWPF.pdb
