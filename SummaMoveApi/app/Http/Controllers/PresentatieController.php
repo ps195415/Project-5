@@ -64,8 +64,7 @@ class PresentatieController extends Controller
                     'data'    => null,
                     'token_type' => 'Bearer'
                 ];
-                return response()->json($content,400);
-
+                return response()->json($content, 400);
             } else {
 
                 $content = [
@@ -73,7 +72,7 @@ class PresentatieController extends Controller
                     'data'    => Prestatie::create($request->all()),
                     'token_type' => 'Bearer'
                 ];
-                return response()->json($content,202);
+                return response()->json($content, 202);
             }
         } catch (\Throwable $th) {
             Log::emergency('presentatie toevoegen', ['error' => $th->getMessage()]);
@@ -97,13 +96,21 @@ class PresentatieController extends Controller
     public function show(Prestatie $prestatie)
     {
         //
-        try{
+        try {
             $content = [
-
+                'success' => true,
+                'data'    => $prestatie,
+                'token_type' => 'Bearer'
             ];
-        }
-        catch (\Throwable $th){
-
+            return response()->json($content, 200);
+        } catch (\Throwable $th) {
+            Log::emergency('prestatie tonen', ['error' => $th->getMessage()]);
+            $content = [
+                'success' => false,
+                'data'    => null,
+                'token_type' => 'Bearer'
+            ];
+            return response()->json($content, 500);
         }
     }
 
@@ -114,9 +121,40 @@ class PresentatieController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Prestatie $prestatie)
     {
-        //
+        try {
+            Log::info('prestaties toevoegen', [' ip' => $request->ip(), 'data' => $request->all()]);
+            $validator = Validator::make($request->all(), [
+                'aantal' => 'required',
+            ]);
+            if ($validator->fails()) {
+                Log::error("Presentaite validator error, kan niet updaten.");
+                $content = [
+                    'success' => false,
+                    'data'    => null,
+                    'token_type' => 'Bearer'
+                ];
+                return response()->json($content, 400);
+            } else {
+
+                $content = [
+                    'success' => true,
+                    'data'    => $prestatie->update($request->all()),
+                    'token_type' => 'Bearer'
+                ];
+                return response()->json($content, 202);
+            }
+        } catch (\Throwable $th) {
+            Log::emergency('presentatie updaten', ['error' => $th->getMessage()]);
+            $content = [
+                'success' => false,
+                'data'    => null,
+                'foutmelding' => 'Gegegevens kunnen niet aangepast worden.',
+                'token_type' => 'Bearer'
+            ];
+            return response()->json($content, 500);
+        }
     }
 
     /**
@@ -125,8 +163,26 @@ class PresentatieController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, Prestatie $prestatie)
     {
-        //
+        try {
+            Log::info('werknemers verwijderen', ['data' => $prestatie]);
+            $prestatie->delete();
+            $content = [
+                'success' => true,
+                'data'    => $prestatie,
+                'token_type' => 'Bearer'
+            ];
+            return response()->json($content, 202);
+        } catch (\Throwable $th) {
+            Log::emergency('werknemer verwijderen', ['error' => $th->getMessage()]);
+            $content = [
+                'success' => false,
+                'data'    => null,
+                'foutmelding' => 'Gegegevens kunnen niet verwijderd worden.',
+                'token_type' => 'Bearer'
+            ];
+            return response()->json($content, 500);
+        }
     }
 }
