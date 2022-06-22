@@ -1,17 +1,7 @@
-﻿using System;
+﻿using SummaMoveWPF.Classes;
+using SummaMoveWPF.Models;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace SummaMoveWPF
 {
@@ -20,9 +10,24 @@ namespace SummaMoveWPF
     /// </summary>
     public partial class MainWindow : Window
     {
+        private SummaMoveDB _db = new SummaMoveDB();
+
+        public List<Users> user = new List<Users>();
+
         public MainWindow()
         {
             InitializeComponent();
+            Setting();
         }
+
+        public void Setting()
+        {
+            foreach (Users u in _db.Getusers())
+            {
+                user.Add(u);
+            }
+            lstUsers.ItemsSource = user;
+        }
+        
     }
 }
