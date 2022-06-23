@@ -22,5 +22,5 @@ Route::post('/login', [AuthenticationController::class, 'login']);
 Route::group(['middleware' => ['auth:sanctum']], function () {
     //protected routes
     Route::apiResource('prestaties', PresentatieController::class);
-    
+    Route::post('/logout', [AuthenticationController::class, 'logout']);
 });

@@ -18,8 +18,8 @@ class PresentatieController extends Controller
     {
         try {
 
-            if ($request->has('sort')) {
-                $data =  Prestatie::orderBy($request->sort)->get();
+            if ($request->has('user')) {
+                $data =  Prestatie::where('user_id',$request->user)->get();
             } else {
                 $data = Prestatie::all();
             }
@@ -93,14 +93,14 @@ class PresentatieController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Prestatie $prestatie)
+    public function show($id)
     {
-        //
         try {
+            $prestatie = Prestatie::find($id);
             $content = [
                 'success' => true,
                 'data'    => $prestatie,
-                'token_type' => 'Bearer'
+                'message' => 'Prestatie retrieved successfully'
             ];
             return response()->json($content, 200);
         } catch (\Throwable $th) {
@@ -108,7 +108,7 @@ class PresentatieController extends Controller
             $content = [
                 'success' => false,
                 'data'    => null,
-                'token_type' => 'Bearer'
+                'message' => 'Prestatie not found'
             ];
             return response()->json($content, 500);
         }
@@ -121,10 +121,10 @@ class PresentatieController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Prestatie $prestatie)
+    public function update(Request $request, $id)
     {
         try {
-            Log::info('prestaties toevoegen', [' ip' => $request->ip(), 'data' => $request->all()]);
+            Log::info('prestaties updaten', [' ip' => $request->ip(), 'data' => $request->all()]);
             $validator = Validator::make($request->all(), [
                 'aantal' => 'required',
             ]);
@@ -133,15 +133,15 @@ class PresentatieController extends Controller
                 $content = [
                     'success' => false,
                     'data'    => null,
-                    'token_type' => 'Bearer'
+                    'message' => 'Prestatie validator Error'
                 ];
                 return response()->json($content, 400);
             } else {
-
+                $prestatie = Prestatie::find($id);
                 $content = [
                     'success' => true,
                     'data'    => $prestatie->update($request->all()),
-                    'token_type' => 'Bearer'
+                    'message' => 'Prestatie updated'
                 ];
                 return response()->json($content, 202);
             }
@@ -150,8 +150,7 @@ class PresentatieController extends Controller
             $content = [
                 'success' => false,
                 'data'    => null,
-                'foutmelding' => 'Gegegevens kunnen niet aangepast worden.',
-                'token_type' => 'Bearer'
+                'message' => 'Prestatie not found'
             ];
             return response()->json($content, 500);
         }
@@ -163,24 +162,24 @@ class PresentatieController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request, Prestatie $prestatie)
+    public function destroy(Request $request, $id)
     {
         try {
-            Log::info('werknemers verwijderen', ['data' => $prestatie]);
+            $prestatie = Prestatie::find($id);
+            Log::info('Prestatie verwijderen', ['data' => $prestatie]);
             $prestatie->delete();
             $content = [
                 'success' => true,
                 'data'    => $prestatie,
-                'token_type' => 'Bearer'
+                'message' => 'Prestatie Delete sucesfully'
             ];
             return response()->json($content, 202);
         } catch (\Throwable $th) {
-            Log::emergency('werknemer verwijderen', ['error' => $th->getMessage()]);
+            Log::emergency('Prestatie verwijderen', ['error' => $th->getMessage()]);
             $content = [
                 'success' => false,
                 'data'    => null,
-                'foutmelding' => 'Gegegevens kunnen niet verwijderd worden.',
-                'token_type' => 'Bearer'
+                'message' => 'Prestatie not found'
             ];
             return response()->json($content, 500);
         }

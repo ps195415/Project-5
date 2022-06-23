@@ -11,6 +11,6 @@ class Prestatie extends Model
 
     public $timestamps = false;
 
-    protected $fillable = ['Aantal', 'Van', 'Tot', 'Datum'];
+    protected $fillable = ['aantal', 'van', 'tot', 'datum','user_id','oefeningen_id'];
 
 }
