@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Prestatie;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
 
 class PresentatieController extends Controller
 {
@@ -31,7 +32,6 @@ class PresentatieController extends Controller
             return response()->json($content, 200);
         } catch (\Throwable $th) {
             Log::emergency('prestatie', ['error' => $th->getMessage()]);
-
             $content = [
                 'success' => false,
                 'data'    => null,
