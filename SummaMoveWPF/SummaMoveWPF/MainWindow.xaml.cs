@@ -13,6 +13,7 @@ namespace SummaMoveWPF
         private SummaMoveDB _db = new SummaMoveDB();
 
         public List<Users> user = new List<Users>();
+        public List<Oefeningen> oefeningenList = new List<Oefeningen>();
 
         public MainWindow()
         {
@@ -26,7 +27,14 @@ namespace SummaMoveWPF
             {
                 user.Add(u);
             }
+
+            foreach (Oefeningen u in _db.GetAllOefeningen())
+            {
+                oefeningenList.Add(u);
+            }
+
             lstUsers.ItemsSource = user;
+            lstOefeningen.ItemsSource = oefeningenList;
         }
         
     }

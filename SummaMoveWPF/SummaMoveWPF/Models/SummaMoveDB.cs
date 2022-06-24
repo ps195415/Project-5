@@ -59,5 +59,43 @@ namespace SummaMoveWPF.Classes
             //hier wordt het resultaat weergegeven
         }
 
+        public List<Oefeningen> GetAllOefeningen()
+        {
+            List<Oefeningen> resultaat = new List<Oefeningen>();
+
+            try
+            {
+                _conn.Open();
+                MySqlCommand command = _conn.CreateCommand();
+                command.CommandText = "SELECT * FROM oefeningens";
+                MySqlDataReader reader = command.ExecuteReader();
+                DataTable table = new DataTable();
+                table.Load(reader);
+
+                foreach (DataRow rij in table.Rows)
+                {
+                    Oefeningen oefeningen = new Oefeningen();
+
+                    oefeningen.ID = (int)rij["id"];
+                    oefeningen.Naam_NL = (string)rij["naam_NL"];
+                    oefeningen.Naam_EN = (string)rij["naam_EN"];
+                    oefeningen.Omschrijving_EN = (string)rij["omschrijving_EN"];
+                    oefeningen.Omschrijving_NL = (string)rij["omschrijving_NL"];
+
+                    Console.ReadLine();
+                    resultaat.Add(oefeningen);
+                }
+            }
+            catch (Exception e)
+            {
+                Console.Error.WriteLine(e.Message);
+            }
+            finally 
+            {
+                _conn.Close();
+            }
+            return resultaat;
+        }
+
     }
 }

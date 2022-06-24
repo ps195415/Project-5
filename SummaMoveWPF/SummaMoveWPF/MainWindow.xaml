@@ -7,9 +7,11 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <ListView x:Name="lstUsers" Margin="343,18,57,17" DisplayMemberPath="Name"/>
-        <Label x:Name="Users" Content="Users" HorizontalAlignment="Left" Margin="10,18,0,0" VerticalAlignment="Top" FontSize="36" FontFamily="Bahnschrift SemiBold SemiCondensed"/>
-
+        <ListView x:Name="lstUsers" Margin="493,84,10,10" DisplayMemberPath="Name"/>
+        <ListView x:Name="lstOefeningen" Margin="10,84,493,10" DisplayMemberPath="Naam_NL"/>
+        <Label x:Name="Users" Content="Users" HorizontalAlignment="Left" Margin="549,10,0,0" VerticalAlignment="Top" FontSize="36" FontFamily="Bahnschrift SemiBold SemiCondensed"/>
+        <Label x:Name="Oefeningen" Content="Oefeningen" HorizontalAlignment="Left" Margin="10,22,0,0" VerticalAlignment="Top" FontSize="36" FontFamily="Bahnschrift SemiBold SemiCondensed"/>
+                                                 
 
     </Grid>
 </Window>

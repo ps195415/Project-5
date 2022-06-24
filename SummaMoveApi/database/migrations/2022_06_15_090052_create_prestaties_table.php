@@ -16,8 +16,8 @@ return new class extends Migration
         Schema::create('prestaties', function (Blueprint $table) {
             $table->id();
             $table->integer('aantal');
-            $table->dateTime('van');
-            $table->dateTime('tot');
+            $table->time('van');
+            $table->time('tot');
             $table->date('datum');   
             $table->foreignId('user_id')->constrained();  
             $table->foreignId('oefeningen_id')->constrained();        
