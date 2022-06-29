@@ -5,25 +5,29 @@ import AboutScreen from './components/AboutScreen';
 import SettingsScreen from './components/SettingsScreen';
 import OefeningenScreen from './components/OefeningenScreen';
 import PrestatieScreen from './components/PrestatieScreen';
+import LoginScreen from './components/LoginScreen';
 
 const Tab = createMaterialBottomTabNavigator();
 const Stack = createStackNavigator();
 
-
-function AppStack() {
+const AppStack = () => {
   return (
-    <Stack.Navigator>
-      <Stack.Screen name="Prestaties" component={PrestatieScreen} />
-      <Stack.Screen name="Oefeningen" component={OefeningenScreen} />
+    //<Stack.Screen name="Login" component={LoginScreen} />
+    <Stack.Navigator screenOptions={{
+      headerShown: false
+    }}>
+
+      <Stack.Screen name="Home" component={AppTabs} />
     </Stack.Navigator>
   );
 }
 
 
-function AppTabs() {
+const AppTabs = () => {
   return (
     <Tab.Navigator>
-      <Tab.Screen name="Home" component={AppStack} />
+      <Tab.Screen name="Prestaties" component={PrestatieScreen} />
+      <Tab.Screen name="Oefeningen" component={OefeningenScreen} />
       <Tab.Screen name="Over ons" component={AboutScreen} />
       <Tab.Screen name="Instellingen" component={SettingsScreen} />
     </Tab.Navigator>
@@ -33,8 +37,8 @@ function AppTabs() {
 const App = () => {
   return (
     <NavigationContainer>
-      <AppTabs />
+      <AppStack />
     </NavigationContainer>
-  );
+  ); 
 }
 export default App;
