@@ -4,6 +4,7 @@ use App\Http\Controllers\PresentatieController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GuestOefeningenControl;
+use App\Http\Controllers\OefeningenController;
 use App\Http\Controllers\AuthenticationController;
 /*
 |--------------------------------------------------------------------------
@@ -19,8 +20,10 @@ use App\Http\Controllers\AuthenticationController;
 Route::get('Guest', [GuestOefeningenControl::class, 'index']);
 Route::post('/register', [AuthenticationController::class, 'register']);
 Route::post('/login', [AuthenticationController::class, 'login']);
+
 Route::group(['middleware' => ['auth:sanctum']], function () {
     //protected routes
     Route::apiResource('prestaties', PresentatieController::class);
+    Route::apiResource('oefeningen', OefeningenController::class);
     Route::post('/logout', [AuthenticationController::class, 'logout']);
 });

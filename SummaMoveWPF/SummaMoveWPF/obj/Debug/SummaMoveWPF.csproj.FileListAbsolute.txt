@@ -35,7 +35,6 @@ C:\Users\maike\OneDrive\Bureaublad\School\Project-5\SummaMoveWPF\SummaMoveWPF\bi
 C:\Users\maike\OneDrive\Bureaublad\School\Project-5\SummaMoveWPF\SummaMoveWPF\bin\Debug\System.Memory.xml
 C:\Users\maike\OneDrive\Bureaublad\School\Project-5\SummaMoveWPF\SummaMoveWPF\bin\Debug\System.Numerics.Vectors.xml
 C:\Users\maike\OneDrive\Bureaublad\School\Project-5\SummaMoveWPF\SummaMoveWPF\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
-C:\Users\maike\OneDrive\Bureaublad\School\Project-5\SummaMoveWPF\SummaMoveWPF\obj\Debug\SummaMoveWPF.csproj.SuggestedBindingRedirects.cache
 C:\Users\maike\OneDrive\Bureaublad\School\Project-5\SummaMoveWPF\SummaMoveWPF\obj\Debug\SummaMoveWPF.csproj.CopyComplete
 C:\School\leer jaar 2\project 5\Project-5\SummaMoveWPF\SummaMoveWPF\bin\Debug\SummaMoveWPF.exe.config
 C:\School\leer jaar 2\project 5\Project-5\SummaMoveWPF\SummaMoveWPF\bin\Debug\SummaMoveWPF.exe

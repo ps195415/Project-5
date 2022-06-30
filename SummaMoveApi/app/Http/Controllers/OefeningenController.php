@@ -3,45 +3,35 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Prestatie;
+use App\Models\Oefeningen;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 
-class PresentatieController extends Controller
+class OefeningenController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
+        //
         try {
-
-            if ($request->has('user')) {
-                $data =  Prestatie::where('user_id',$request->user)->get();
-            } else {
-                $data = Prestatie::all();
-            }
             $content = [
-                'success' => true,
-                'data'    => $data,
-                'token_type' => 'Bearer',
+                'status' => true,
+                'data' => Oefeningen::All(),
             ];
             return response()->json($content, 200);
         } catch (\Throwable $th) {
-            Log::emergency('prestatie', ['error' => $th->getMessage()]);
             $content = [
-                'success' => false,
-                'data'    => null,
-                'foutmelding' => 'Gegegevens kunnen niet getoond worden',
-                'token_type' => 'Bearer'
+                'status' => false,
+                'data' => null,
             ];
-            return response()->json($content, 500);
+            return response()->json($content, 400);
         }
     }
-
 
     /**
      * Store a newly created resource in storage.
@@ -51,15 +41,15 @@ class PresentatieController extends Controller
      */
     public function store(Request $request)
     {
-        // Verwijder de actuele token
+        //
         try {
-            Log::info('prestaties toevoegen', [' ip' => $request->ip(), 'data' => $request->all()]);
+            Log::info('Oefening toevoegen', [' ip' => $request->ip(), 'data' => $request->all()]);
             $validator = Validator::make($request->all(), [
-                'aantal' => 'required',
+                'naam_NL' => 'required',
                 
             ]);
             if ($validator->fails()) {
-                Log::error("Presentaite validator error, kan niet toevoegen.");
+                Log::error("Oefening validator error, kan niet toevoegen.");
                 $content = [
                     'success' => false,
                     'data'    => null,
@@ -70,13 +60,13 @@ class PresentatieController extends Controller
 
                 $content = [
                     'success' => true,
-                    'data'    => Prestatie::create($request->all()),
+                    'data'    => Oefeningen::create($request->all()),
                     'token_type' => 'Bearer'
                 ];
                 return response()->json($content, 202);
             }
         } catch (\Throwable $th) {
-            Log::emergency('presentatie toevoegen', ['error' => $th->getMessage()]);
+            Log::emergency('Oefening toevoegen', ['error' => $th->getMessage()]);
             $content = [
                 'success' => false,
                 'data'    => null,
@@ -87,7 +77,6 @@ class PresentatieController extends Controller
         }
     }
 
-
     /**
      * Display the specified resource.
      *
@@ -96,20 +85,21 @@ class PresentatieController extends Controller
      */
     public function show($id)
     {
+        //
         try {
-            $prestatie = Prestatie::find($id);
+            $oefeningen = Oefeningen::find($id);
             $content = [
                 'success' => true,
-                'data'    => $prestatie,
-                'message' => 'Prestatie retrieved successfully'
+                'data'    => $oefeningen,
+                'message' => 'Oefeningen retrieved successfully'
             ];
             return response()->json($content, 200);
         } catch (\Throwable $th) {
-            Log::emergency('prestatie tonen', ['error' => $th->getMessage()]);
+            Log::emergency('Oefeningen tonen', ['error' => $th->getMessage()]);
             $content = [
                 'success' => false,
                 'data'    => null,
-                'message' => 'Prestatie not found'
+                'message' => 'Oefeningen not found'
             ];
             return response()->json($content, 500);
         }
@@ -124,34 +114,35 @@ class PresentatieController extends Controller
      */
     public function update(Request $request, $id)
     {
+        //
         try {
-            Log::info('prestaties updaten', [' ip' => $request->ip(), 'data' => $request->all()]);
+            Log::info('Oefeningen updaten', [' ip' => $request->ip(), 'data' => $request->all()]);
             $validator = Validator::make($request->all(), [
-                'aantal' => 'required',
+                'naam_NL' => 'required',
             ]);
             if ($validator->fails()) {
-                Log::error("Presentaite validator error, kan niet updaten.");
+                Log::error("Oefeningen validator error, kan niet updaten.");
                 $content = [
                     'success' => false,
                     'data'    => null,
-                    'message' => 'Prestatie validator Error'
+                    'message' => 'Oefeningen validator Error'
                 ];
                 return response()->json($content, 400);
             } else {
-                $prestatie = Prestatie::find($id);
+                $oefeningen = Oefeningen::find($id);
                 $content = [
                     'success' => true,
-                    'data'    => $prestatie->update($request->all()),
-                    'message' => 'Prestatie updated'
+                    'data'    => $oefeningen->update($request->all()),
+                    'message' => 'Oefeningen updated'
                 ];
                 return response()->json($content, 202);
             }
         } catch (\Throwable $th) {
-            Log::emergency('presentatie updaten', ['error' => $th->getMessage()]);
+            Log::emergency('Oefeningen updaten', ['error' => $th->getMessage()]);
             $content = [
                 'success' => false,
                 'data'    => null,
-                'message' => 'Prestatie not found'
+                'message' => 'Oefeningen not found'
             ];
             return response()->json($content, 500);
         }
@@ -163,24 +154,25 @@ class PresentatieController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request, $id)
+    public function destroy($id)
     {
+        //
         try {
-            $prestatie = Prestatie::find($id);
-            Log::info('Prestatie verwijderen', ['data' => $prestatie]);
-            $prestatie->delete();
+            $oefeningen = Oefeningen::find($id);
+            Log::info('Oefeningen verwijderen', ['data' => $oefeningen]);
+            $oefeningen->delete();
             $content = [
                 'success' => true,
-                'data'    => $prestatie,
-                'message' => 'Prestatie Delete sucesfully'
+                'data'    => $oefeningen,
+                'message' => 'Oefeningen Delete sucesfully'
             ];
             return response()->json($content, 202);
         } catch (\Throwable $th) {
-            Log::emergency('Prestatie verwijderen', ['error' => $th->getMessage()]);
+            Log::emergency('Oefeningen verwijderen', ['error' => $th->getMessage()]);
             $content = [
                 'success' => false,
                 'data'    => null,
-                'message' => 'Prestatie not found'
+                'message' => 'Oefeningen not found'
             ];
             return response()->json($content, 500);
         }
