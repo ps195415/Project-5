@@ -46,6 +46,9 @@ class OefeningenController extends Controller
             Log::info('Oefening toevoegen', [' ip' => $request->ip(), 'data' => $request->all()]);
             $validator = Validator::make($request->all(), [
                 'naam_NL' => 'required',
+                'naam_EN' => 'required',
+                'omschrijving_NL' => 'required',
+                'omschrijving_EN' => 'required'
                 
             ]);
             if ($validator->fails()) {
@@ -119,6 +122,10 @@ class OefeningenController extends Controller
             Log::info('Oefeningen updaten', [' ip' => $request->ip(), 'data' => $request->all()]);
             $validator = Validator::make($request->all(), [
                 'naam_NL' => 'required',
+                'naam_EN' => 'required',
+                'omschrijving_NL' => 'required',
+                'omschrijving_EN' => 'required'
+                
             ]);
             if ($validator->fails()) {
                 Log::error("Oefeningen validator error, kan niet updaten.");
