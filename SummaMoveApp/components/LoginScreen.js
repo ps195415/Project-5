@@ -8,12 +8,25 @@ import {
     TouchableOpacity,
 } from "react-native";
 
-const LoginScreen = () => {
+const LoginScreen = ({ navigation }) => {
+    const [loggedIn, isLoggedIn] = useState(true);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
-    const login = () => {
-        
+    const login = async () => {
+        try {
+            const response = await fetch('https://summasport.herokuapp.com/api/Guest');
+            const json = await response.json();
+            console.log(json);
+            if (json.data != null) {
+                navigation.navigate('Home')
+            }
+
+        }
+        catch (error) {
+            console.error(error);
+        }
+
     }
 
     return (
@@ -51,7 +64,7 @@ const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "center",
     },
-    inputView: {    
+    inputView: {
         backgroundColor: "lightgray",
         borderRadius: 5,
         width: "50%",
@@ -67,7 +80,6 @@ const styles = StyleSheet.create({
     },
 
     loginText: {
-        Fontsize: 20,
         color: "white",
     },
 

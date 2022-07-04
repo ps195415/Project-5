@@ -6,18 +6,19 @@ import SettingsScreen from './components/SettingsScreen';
 import OefeningenScreen from './components/OefeningenScreen';
 import PrestatieScreen from './components/PrestatieScreen';
 import LoginScreen from './components/LoginScreen';
-
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 const Tab = createMaterialBottomTabNavigator();
 const Stack = createStackNavigator();
 
 const AppStack = () => {
   return (
-    //<Stack.Screen name="Login" component={LoginScreen} />
+    //
     <Stack.Navigator screenOptions={{
       headerShown: false
     }}>
-
+      <Stack.Screen name="Login" component={LoginScreen} />
       <Stack.Screen name="Home" component={AppTabs} />
+      <Stack.Screen options={{headerShown: true}} name="Presentatie" component={PrestatieScreen} />
     </Stack.Navigator>
   );
 }
@@ -25,11 +26,28 @@ const AppStack = () => {
 
 const AppTabs = () => {
   return (
-    <Tab.Navigator>
-      <Tab.Screen name="Prestaties" component={PrestatieScreen} />
-      <Tab.Screen name="Oefeningen" component={OefeningenScreen} />
-      <Tab.Screen name="Over ons" component={AboutScreen} />
-      <Tab.Screen name="Instellingen" component={SettingsScreen} />
+    <Tab.Navigator
+      activeColor="#f0edf6"
+      inactiveColor="#3e2465"
+      barStyle={{ backgroundColor: '#694fad' }}
+    >
+      <Tab.Screen name="Oefeningen" component={OefeningenScreen}
+        options={{
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons name="baseball" color={color} size={26} />
+          ),
+        }} />
+      <Tab.Screen name="Over ons" component={AboutScreen} options={{
+        tabBarIcon: ({ color }) => (
+          <MaterialCommunityIcons name="account-settings" color={color} size={26} />
+        ),
+      }} />
+      <Tab.Screen name="Instellingen" component={SettingsScreen}
+        options={{
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons name="apps" color={color} size={26} />
+          ),
+        }} />
     </Tab.Navigator>
   );
 }
@@ -39,6 +57,8 @@ const App = () => {
     <NavigationContainer>
       <AppStack />
     </NavigationContainer>
-  ); 
+  );
 }
+
+
 export default App;
